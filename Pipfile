@@ -1,0 +1,16 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+sqlalchemy = "*"
+alembic = "*"
+faker = "*"
+ipdb = "*"
+pytest = "*"
+importlib-resources = "*"
+flask-sqlalchemy = "==2.5.1"
+
+[requires]
+python_version = "3.8.13"
