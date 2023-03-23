@@ -110,6 +110,9 @@ def search_data(self):
         print_bottles(self.grapes[int(user_pick) - 1].bottles)
     elif user_action == "W" or user_action == "w":
         print_wineries(self.wineries)
+        user_pick = input("Type the number of the winery from the list above to see bottles from that winery: ")
+        print(' ')
+        print_bottles(self.wineries[int(user_pick) - 1].bottles)
 
 def show_data(self):
     user_action = input("Type B to list your bottles, G to list grapes or W to list wineries: ")
@@ -129,6 +132,8 @@ def print_grapes(grapes):
     for index, grape in enumerate(grapes):
         print(f'{index + 1}. {grape.name}')
 
+    print(' ')
+
 def print_wineries(wineries):
     print(' ')
     print('** Wineries **')
@@ -136,6 +141,8 @@ def print_wineries(wineries):
 
     for index, winery in enumerate(wineries):
         print(f'{index + 1}. {winery.name}')
+    
+    print(' ')
 
 def print_bottles(bottles):
     for index, bottle in enumerate(bottles):
