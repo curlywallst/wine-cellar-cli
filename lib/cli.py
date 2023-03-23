@@ -10,7 +10,7 @@ class CLI:
         self.wineries = [winery for winery in session.query(Winery)]
         self.bottles = [bottle for bottle in session.query(Bottle)]
         self.name = user_input
-        CLI.start(self)
+        self.start()
 
     def start(self):
         print(' ')
@@ -95,7 +95,7 @@ def make_bottle(self):
     session.commit()
 
     self.bottles.append(bottle)
-
+    print(' ')
     print('Congratulations! You have added the following wine to your Vitual Cellar!')
 
     print_bottle(bottle)
