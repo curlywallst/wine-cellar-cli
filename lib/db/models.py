@@ -20,7 +20,7 @@ class Winery(Base):
 
     def __repr__(self):
         return f'Winery(id={self.id}, ' + \
-            f'title={self.name}'
+            f'name={self.name})'
     
 class Grape(Base):
     __tablename__ = 'grapes'
@@ -32,7 +32,7 @@ class Grape(Base):
 
     def __repr__(self):
         return f'Grape(id={self.id}, ' + \
-            f'title={self.name}'
+            f'name={self.name})'
 
 class Bottle(Base):
     __tablename__ = 'bottles'
@@ -49,6 +49,6 @@ class Bottle(Base):
     def __repr__(self):
         return f'Bottle(id={self.id}, ' + \
             f'score={self.score}, ' + \
-            f'score={self.price}, ' + \
+            f'price={self.price}, ' + \
             f'grape_id={self.grape_id})' + \
-            f'grape_id={self.winery_id})'
+            f'winery_id={self.winery_id})'
