@@ -10,21 +10,28 @@ class CLI:
         CLI.start(self)
 
     def start(self):
-        print('***** Welcome To The Virtual Wine Keeper *****')
+        print(f'***** Welcome To The Virtual Wine Keeper {self.value} *****')
         exit = False
         while exit == False:
-            user_input = input("Would you like to stop now? (Type Y/N): ")
-            if user_input == "Y" or user_input == 'y':
-                exit = True
 
-            else:
                 user_action = input("Type B to add a bottle, G to add a grape or W to add a winery: ")
                 if user_action == "G" or user_action == "g":
-                    grape_name = input("Type grape name: ")
-                    grape = Grape(name = grape_name)
+                    name = input("Type grape name: ")
+                    grape = Grape(name = name)
 
                     session.add(grape)
                     session.commit()
+
+                elif user_action == "W" or user_action == "w":
+                    name = input("Type winery name: ")
+                    winery = Winery(name = name)
+
+                    session.add(winery)
+                    session.commit()
+
+                user_input = input("Would you like to stop now? (Type Y/N): ")
+                if user_input == "Y" or user_input == 'y':
+                    exit = True
 
 
         
