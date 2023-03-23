@@ -81,12 +81,14 @@ def add_data(self):
 def make_bottle(self):
     user_grape = input("Type the number of the grape from the list above: ")
     user_winery = input("Type the number of the winery from the list above: ")
+    year = input("What vintage is the bottle?: " )
     price = input("How much did you pay for the bottle?: " )
     score = input("How would you rate it on a scale of 1-10?: " )
 
     bottle = Bottle(
             price = price,
             score = score,
+            year = year,
             grape_id = self.grapes[int(user_grape) - 1].id,
             winery_id = self.wineries[int(user_winery) - 1].id
     )
@@ -145,6 +147,10 @@ def print_wineries(wineries):
     print(' ')
 
 def print_bottles(bottles):
+    print(' ')
+    print('** Bottles **')
+    print(' ')
+
     for index, bottle in enumerate(bottles):
         print_bottle(bottle)
     print(' ')   
@@ -153,6 +159,7 @@ def print_bottle(bottle):
     print(' ')
     print(f'Winery: {bottle.winery.name}')
     print(f'Grape: {bottle.grape.name}')
+    print(f'    Year:  {bottle.year}')
     print(f'    Price: {bottle.price}')
     print(f'    Score: {bottle.score}')
         

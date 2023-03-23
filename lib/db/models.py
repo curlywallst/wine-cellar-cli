@@ -40,6 +40,7 @@ class Bottle(Base):
     id = Column(Integer(), primary_key=True)
     score = Column(Integer())
     price = Column(Integer())
+    year = Column(Integer())
     grape_id = Column(Integer(), ForeignKey('grapes.id'))
     winery_id = Column(Integer(), ForeignKey('wineries.id'))
 
@@ -50,5 +51,6 @@ class Bottle(Base):
         return f'Bottle(id={self.id}, ' + \
             f'score={self.score}, ' + \
             f'price={self.price}, ' + \
+            f'year={self.year}, ' + \
             f'grape_id={self.grape_id})' + \
             f'winery_id={self.winery_id})'
