@@ -17,9 +17,9 @@ class CLI:
         print(f'***** Welcome To The Virtual Wine Keeper {self.name} *****')
         print(' ')
 
-        exit = False
-        while exit == False:
-                choice = input(f'Type "list" to see the wineries, bottles or grapes, type "add" to add a bottle, winery or grape, type "search" to find bottles by winery or grape: ')
+        exit_loop = False
+        while exit_loop == False:
+                choice = input(f'Type "list" to see the wineries, bottles or grapes, type "add" to add a bottle, winery or grape, type "search" to find bottles by winery or grape, type "exit" to end session: ')
                 print(' ') 
                 if choice.lower() == "list":
                      show_data(self)
@@ -27,18 +27,19 @@ class CLI:
                      add_data(self)
                 elif choice.lower() == "search":
                      search_data(self)
-        
-                print(' ')
-                user_input = input("Would you like to stop now? (Type Y/N): ")
-                print(' ')
-                if user_input == "Y" or user_input == 'y':
-                    exit = True
+                elif choice.lower() == "exit":
+                    exit_loop = True
+                else:
+                    print_error(self.name)
 
         printer(self.name)
 
 def add_data(self):
-    user_action = input("Type B to add a bottle, G to add a grape or W to add a winery: ")
-    print(' ')
+    user_action = prompt_bgw()
+
+    while user_action != "B" and user_action != "b" and user_action != "G" and user_action != "g" and user_action != "W" and user_action != "w":
+        print_error(self.name)
+        user_action = prompt_bgw()
 
     if user_action == "G" or user_action == "g":
         name = input("Type grape name: ")
@@ -58,12 +59,11 @@ def add_data(self):
 
         self.wineries.append(winery)
 
-
     elif user_action == "B" or "b":
         print_grapes(self.grapes)
         print_wineries(self.wineries)
         print(' ')
-        user_input = input("Is your Grape and Winery in the lists above? (Type Y/N): ")
+        user_input = prompt_gw()
         print(' ')
 
         while user_input != "Y" and user_input != "y":
@@ -72,10 +72,13 @@ def add_data(self):
             print_grapes(self.grapes)
             print_wineries(self.wineries)
             print(' ')
-            user_input = input("Is your Grape and Winery in the lists above? (Type Y/N): ")
+            user_input = prompt_gw()
             print(' ')
 
         make_bottle(self)
+
+
+
 
 
 def make_bottle(self):
@@ -166,6 +169,20 @@ def print_bottle(bottle):
 def printer(user_input):
     print(' ')
     print(f'Goodbye {user_input}!')
+
+def prompt_bgw():
+    user_action = input("Type B to add a bottle, G to add a grape or W to add a winery: ")
+    print(' ')
+    return user_action
+
+def prompt_gw():
+    user_action = input("Is your Grape and Winery in the lists above? (Type Y/N): ")
+    print(' ')
+    return user_action
+
+def print_error(name):
+        print(f'Sorry {name}, but I am not sure what you mean.  Please try that again.')
+        print(' ')
 
 if __name__ == '__main__':
     engine = create_engine('sqlite:///db/wines_library.db')
