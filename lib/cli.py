@@ -103,7 +103,7 @@ def make_bottle(self):
         p = re.compile('[0-9.]')
         px = p.findall(price)
 
-    px = float(''.join(px))
+    px = ''.join(px)
 
     score = input("How would you rate it on a scale of 1-10?: " )
     while not score or int(score) <1 or int(score) >10:
@@ -212,9 +212,9 @@ def print_bottle(bottle):
     print(f'    Price: ${round(bottle.price, 2)}')
     print(f'    Score: {bottle.score}')
         
-def print_goodbye(user_input):
+def print_goodbye(name):
     print(' ')
-    print(f'Goodbye {user_input}!')
+    print(f'Goodbye {name}!')
 
 def prompt_bgw():
     user_action = input("Type B to add a bottle, G to add a grape or W to add a winery: ")
