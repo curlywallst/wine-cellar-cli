@@ -82,14 +82,34 @@ def make_bottle(self):
     user_grape = input("Type the number of the grape from the list above: ")
     user_winery = input("Type the number of the winery from the list above: ")
     year = input("What vintage is the bottle?: " )
+    y = re.compile('[0-9]')
+    yr = y.findall(year)
+
+    while len(yr) != 2 and len(yr) != 4:
+        print(' ')
+        print_error(self.name)       
+        year = input("What vintage is the bottle?: " )
+        y = re.compile('[0-9]')
+        yr = y.findall(year)
 
     price = input("How much did you pay for the bottle?: " )
-
     p = re.compile('[0-9.]')
     px = p.findall(price)
+
+    while len(px) == 0:
+        print(' ')
+        print_error(self.name)
+        price = input("How much did you pay for the bottle?: " )
+        p = re.compile('[0-9.]')
+        px = p.findall(price)
+
     px = float(''.join(px))
 
     score = input("How would you rate it on a scale of 1-10?: " )
+    while not score or int(score) <1 or int(score) >10:
+        print(' ')
+        print_error(self.name)
+        score = input("How would you rate it on a scale of 1-10?: " )
 
     bottle = Bottle(
             price = px,
