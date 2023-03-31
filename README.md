@@ -11,3 +11,6 @@ run 'alembic upgrade head'
 
 cd into lib/db
 run 'python cli.py' to get started!
+
+
+Testing updated host key
