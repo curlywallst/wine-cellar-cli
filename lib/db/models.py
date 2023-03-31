@@ -1,5 +1,5 @@
 from sqlalchemy import create_engine, func
-from sqlalchemy import ForeignKey, Column, Integer, String, DateTime
+from sqlalchemy import ForeignKey, Column, Integer, String, DateTime, Float
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -39,7 +39,7 @@ class Bottle(Base):
 
     id = Column(Integer(), primary_key=True)
     score = Column(Integer())
-    price = Column(Integer())
+    price = Column(Float(precision=2))
     year = Column(Integer())
     grape_id = Column(Integer(), ForeignKey('grapes.id'))
     winery_id = Column(Integer(), ForeignKey('wineries.id'))

@@ -3,6 +3,7 @@
 from db.models import Grape, Bottle, Winery
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+import re
 
 class CLI:
     def __init__(self, user_input):
@@ -32,7 +33,7 @@ class CLI:
                 else:
                     print_error(self.name)
 
-        printer(self.name)
+        print_goodbye(self.name)
 
 def add_data(self):
     user_action = prompt_bgw()
@@ -77,19 +78,21 @@ def add_data(self):
 
         make_bottle(self)
 
-
-
-
-
 def make_bottle(self):
     user_grape = input("Type the number of the grape from the list above: ")
     user_winery = input("Type the number of the winery from the list above: ")
     year = input("What vintage is the bottle?: " )
+
     price = input("How much did you pay for the bottle?: " )
+
+    p = re.compile('[0-9.]')
+    px = p.findall(price)
+    px = float(''.join(px))
+
     score = input("How would you rate it on a scale of 1-10?: " )
 
     bottle = Bottle(
-            price = price,
+            price = px,
             score = score,
             year = year,
             grape_id = self.grapes[int(user_grape) - 1].id,
@@ -108,14 +111,37 @@ def make_bottle(self):
 def search_data(self):
     user_action = input("Type G to search bottles by grape or W to search bottles by winery: ")
     print(' ')
+    
+    while user_action != "G" and user_action != "g" and user_action != "W" and user_action != "w":
+        print_error(self.name)
+        user_action = input("Type G to search bottles by grape or W to search bottles by winery: ")
+        print(' ')
+
     if user_action == "G" or user_action == "g":
         print_grapes(self.grapes)
-        user_pick = input("Type the number of the grape from the list above to see bottles of that grape: ")
+        valid_pick = False
+        while not valid_pick:
+            user_pick = input("Type the number of the grape from the list above to see bottles of that grape: ")
+            if int(user_pick) in range(1, len(self.grapes)):
+                valid_pick = True
+            else:
+                print(' ')
+                print_error(self.name)
+                
         print(' ')
         print_bottles(self.grapes[int(user_pick) - 1].bottles)
+        
     elif user_action == "W" or user_action == "w":
         print_wineries(self.wineries)
-        user_pick = input("Type the number of the winery from the list above to see bottles from that winery: ")
+        valid_pick = False
+        while not valid_pick:
+            user_pick = input("Type the number of the winery from the list above to see bottles from that winery: ")
+            if int(user_pick) in range(1, len(self.bottles)):
+                valid_pick = True
+            else:
+                print(' ')
+                print_error(self.name)
+
         print(' ')
         print_bottles(self.wineries[int(user_pick) - 1].bottles)
 
@@ -163,10 +189,10 @@ def print_bottle(bottle):
     print(f'Winery: {bottle.winery.name}')
     print(f'Grape: {bottle.grape.name}')
     print(f'    Year:  {bottle.year}')
-    print(f'    Price: {bottle.price}')
+    print(f'    Price: ${round(bottle.price, 2)}')
     print(f'    Score: {bottle.score}')
         
-def printer(user_input):
+def print_goodbye(user_input):
     print(' ')
     print(f'Goodbye {user_input}!')
 

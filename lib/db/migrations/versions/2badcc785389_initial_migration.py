@@ -1,9 +1,8 @@
-"""creating tables"
+"""initial migration
 
-
-Revision ID: 7dabd820c9e9
+Revision ID: 2badcc785389
 Revises: 
-Create Date: 2023-03-22 11:03:07.772812
+Create Date: 2023-03-30 09:41:31.817214
 
 """
 from alembic import op
@@ -11,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '7dabd820c9e9'
+revision = '2badcc785389'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -34,7 +33,8 @@ def upgrade() -> None:
     op.create_table('bottles',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('score', sa.Integer(), nullable=True),
-    sa.Column('price', sa.Integer(), nullable=True),
+    sa.Column('price', sa.Float(precision=2), nullable=True),
+    sa.Column('year', sa.Integer(), nullable=True),
     sa.Column('grape_id', sa.Integer(), nullable=True),
     sa.Column('winery_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['grape_id'], ['grapes.id'], ),
