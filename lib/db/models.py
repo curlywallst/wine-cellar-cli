@@ -44,8 +44,6 @@ class Bottle(Base):
     grape_id = Column(Integer(), ForeignKey('grapes.id'))
     winery_id = Column(Integer(), ForeignKey('wineries.id'))
 
-    # grape = relationship('Grape', backref_populates='bottles')
-    # winery = relationship('Winery', backref_populates='bottles')
 
     def __repr__(self):
         return f'Bottle(id={self.id}, ' + \

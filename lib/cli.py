@@ -230,9 +230,20 @@ def print_error(name):
         print(f'Sorry {name}, but I am not sure what you mean.  Please try that again.')
         print(' ')
 
+import click
+
+@click.command()
+@click.option('--name', prompt='Your name',
+              help='The person to greet.')
+def hello(name):
+    """Simple program that greets NAME for a total of COUNT times."""
+    click.echo(f"Hello {name}!")
+    CLI(name)
+
 if __name__ == '__main__':
     engine = create_engine('sqlite:///db/wines_library.db')
     Session = sessionmaker(bind=engine)
     session = Session()
-    user_input = input("Enter Your Name: ")
-    CLI(user_input)
+    hello()
+
+ 
